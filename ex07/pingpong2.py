@@ -12,7 +12,7 @@ class Screen:
         background_image : 背景画像ファイルパス
         """
         pg.display.set_caption(title)
-        self.sfc = pg.display.set_mode(width_height)
+        self.sfc = pg.display.set_mode(width_height) 
         self.rct = self.sfc.get_rect()
         self.bgi_sfc = pg.image.load(background_image)
         self.bgi_rct = self.bgi_sfc.get_rect()
@@ -39,7 +39,7 @@ class Line:
 
 
 class Ball:
-    def __init__(self, color: tuple[int, int, int], radius: int, scr:Screen):
+    def __init__(self, color, radius: int, scr:Screen):
         """
         イニシャライザ
         color : 色タプル
@@ -74,7 +74,7 @@ class Player:
         xy : 中心タプル
         """
         self.sfc = pg.Surface((width, height))
-        pg.draw.rect(self.sfc, color, (width, height, width, height), 10)
+        pg.draw.rect(self.sfc, color, (0, 0, width, height), 10)
         self.rct = self.sfc.get_rect()
         self.rct.center = xy
         self.vx, self.vy = 0, +1
@@ -96,7 +96,7 @@ class Player:
 
 
 class Enemy:
-    def __init__(self, color: tuple[int, int, int], width: int, height: int, xy: tuple[int, int]):
+    def __init__(self, color, width: int, height: int, xy):
         """ 
         イニシャライザ
         color : 色タプル
@@ -105,7 +105,7 @@ class Enemy:
         xy : 中心座標タプル
         """
         self.sfc = pg.Surface((width, height))
-        pg.draw.rect(self.sfc, color, (width, height, width, height), 10)
+        pg.draw.rect(self.sfc, color, (0, 0, width, height), 10)
         self.rct = self.sfc.get_rect()
         self.rct.center = xy
         self.vx, self.vy = 0, 1
@@ -158,7 +158,7 @@ def main():
     scr = Screen("PingPong", (1600, 800),"fig/pg_bg.jpg")
     line = Line(15, scr.rct.height, scr)
     ball = Ball((255, 0, 0), 10, scr)
-    player = Player((255, 255, 255), 15, 70, (15, scr.rct.height/2))
+    player = Player((255, 0, 255), 15, 70, (15, scr.rct.height/2))
     enemy = Enemy((255, 255, 255), 15, 70, (scr.rct.width-15, scr.rct.height/2))
     score = Score(0, 0, ball, scr)
     clock = pg.time.Clock()
